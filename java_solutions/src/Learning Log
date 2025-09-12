@@ -1,0 +1,250 @@
+📅 2025-08-05
+📌 Range Sum Optimization
+- Use a prefix sum array (length = input.length + 1)
+- Allows O(1) range sum queries using: sum[right + 1] - sum[left]
+
+📌 Smart Boundary Search
+- Avoid iterating through large theoretical bounds
+- Use efficient techniques (e.g. binary search) to find actual start/end (e.g. fruit harvesting problem)
+
+📌 MinHeap Use Case
+- Useful for working with the smallest half of a dataset
+- Keeps elements sorted and accessible efficiently
+
+📅 2025-08-06
+  🧠 Today: practiced binary search, HashMaps, and memoization on the fruit allocation problem
+  ↪ solution handled up to 4k elements, failed at 5k+
+  ↪ next step: study square root decomposition, segmentation trees (as per LeetCode optimal)
+
+  💡 Still fresh: prefix sums, signatures (e.g. for palindromes)
+
+📅 2025-08-07
+    ✅ Topic 1: Understanding & Translating a Problem
+        Before applying any algorithm, I need to translate the problem from its raw description into something more abstract and logical.
+        I do this by:
+        Reading carefully and rephrasing the task in my own words
+        Identifying fixed (static) and changing (dynamic) components
+        Matching patterns to familiar algorithmic strategies
+        This translation step unlocks which tools I can use (prefix sums, DP, greedy, etc.)
+
+    ✅ Topic 2: Big-O Thinking in Practice
+    Once I have multiple approaches in mind, I use Big-O analysis to evaluate which one is best suited for the dataset size.
+    I compare each approach’s time complexity to the problem's constraints (e.g., O(n²) is bad for n > 10⁴).
+    This helps me discard inefficient strategies early and focus on scalable solutions.
+
+    ✅ Topic 3: Destructuring / Granularizing a Problem
+        After translation, I need to break the problem down into small, manageable parts.
+
+        I do this by:
+
+        🧠 Granularizing / Destructuring a Problem (Step-by-Step)
+            🔸 1. Identify the "core action" or goal
+            Ask:
+
+            What is the fundamental thing the problem wants me to calculate, find, or optimize?
+
+            Example:
+
+            “Collect the max number of fruits from moving positions”
+            → Core goal: maximize sum over intervals, possibly under movement constraints.
+
+            🔸 2. Separate static vs. dynamic parts
+            Type	What to look for
+            Static	Input values, array lengths, fixed rules
+            Dynamic	Moving indices, changing states, iterations, decisions
+
+            Example:
+
+            Static: array of fruit quantities
+
+            Dynamic: 3 agents moving left/right across the array
+
+            🔸 3. Decompose the task into sub-operations
+            Break it down into small operations or decisions that need to be repeated or solved.
+
+            Questions to ask:
+
+            What are the repeatable steps?
+
+            Can I isolate parts like “move,” “collect,” “compare,” “store,” etc.?
+
+            Example:
+
+            Step 1: Choose start position
+
+            Step 2: Move agents within k steps
+
+            Step 3: Track max fruit sum
+            → Looks like a range-sum problem with constraints → maybe prefix sums
+
+            🔸 4. Recognize dependencies between parts
+            Which parts depend on others?
+
+            Can some parts be precomputed?
+
+            Are there overlapping subproblems?
+
+            This is where you spot:
+
+            Reusable results → DP or memoization
+
+            Independent parts → parallel loops or prefix sums
+
+            Decisions leading to optimal states → Greedy or backtracking
+
+            🔸 5. Model each part independently (if possible)
+            Try to isolate and solve each granular piece in a minimal form.
+
+            Examples:
+
+            “Can I solve just the fruit collection for 1 agent first?”
+
+            “What if all 3 start at the same spot?”
+
+            “Can I precompute range sums for fast lookups?”
+
+            🔸 6. Reassemble into a full solution plan
+            Once you’ve got small parts modeled or understood:
+
+            Put them in order of execution
+
+            Identify loops, state updates, or branching decisions
+
+            Evaluate time/space complexity of the combined flow
+
+    ✅ Topic 4: Sqrt Decomposition
+        Speed up queries (like sum, min, etc.) on large datasets by splitting them into blocks of size sqrt(n):
+        Preprocess aggregates per block
+        Query in O(sqrt(n)) time instead of O(n)
+        Very useful for medium to large arrays with repeated queries.
+
+    💤 Notes:
+    Lazy day overall, but I still made progress with sqrt decomposition, big unlock for solving problems with large input sizes efficiently.
+    I now see that the key to advanced solutions is understanding + structuring + scaling, not just coding fast.
+
+📅 2025-08-08
+    Collecting on 2D Matrix DP Problem (upper right and lower left triangles)
+    DP is reliable, but a deep understanding of the problem's structure allows for iteration-based solutions with little to no extra space — ideal when memory is a concern.
+
+    What I did:
+
+    Solved a matrix problem involving collecting values by iterating only over the lower-left and upper-right triangles.
+    Initially chose a DP-based solution with memoization, which was accepted, but exec time was not ideal.
+    Thought of iterating directly over the matrix without DP just doing accumulative sums (prefix sum approach), but mistakenly implemented column-wise iteration instead of row-wise.
+    This led to incorrect updates in the upper-right triangle, as only vertical accumulation was considered.
+    Missed the possibility of picking better values via the upper-left parent, which column-wise traversal failed to capture.
+    Ultimately gave up on the space-optimized approach and reverted to the DP version with memoization.
+
+    What I learned:
+
+    DIRECTION OF ITERATION MATTERS — column-wise traversal in this context ignored key decision paths.
+    When implementing a new approach, walk through small examples to validate update logic.
+    Trust initial instincts (row-wise traversal) and double-check assumptions before discarding an idea.
+
+    Actionable Insight:
+
+    TAKE BREAKS WHEN STUCK MOTHERFUCKER, instead of pushing through — mental reset can reveal simple mistakes.
+    Rehearse implementation logic visually or on paper before coding, especially with matrix traversal.
+
+📅 2025-08-13
+    ✅ Topics Covered:
+    Binary representation of integers
+    Java integer type limits:
+    int: 32-bit → max = 2,147,483,647
+    long: 64-bit → max = 9,223,372,036,854,775,807
+
+    Bit manipulation trick:
+    To check if n is a power of 2:
+    n>0 && (n & (n−1))==0
+    This works because powers of two have only one 1-bit in their binary representation.
+
+    ✅ Modulo Arithmetic:
+    Distributive property applies, Also applies to addition and subtraction:
+    (a⋅b) mod c=((a mod c)⋅(b mod c)) mod c
+
+    🔍 Bit shifting:
+    n << k → Multiply by 2 ^ k
+    n >> k → Divide by 2 ^ k (with sign extension)
+    n >>> k → Unsigned right shift (fills left bits with 0)
+
+    🎭 Bit masks:
+    Use AND, OR, and XOR to set, clear, or toggle specific bits:
+    Set bit k: n | (1 << k)
+    Clear bit k: n & ~(1 << k)
+    Toggle bit k: n ^ (1 << k)
+    Check bit k: (n >> k) & 1
+
+📅 2025-08-14
+    ✅ When to Use Bottom-Up
+    When you want to count combinations/ways (e.g. coin change, subset sum).
+    When you want to optimize performance (no stack overhead or deep recursion).
+    When the state transitions are clear and manageable in array form.
+
+    🤯 So, How Prefix Sum Thinking Translates:
+    Thinking	Bottom-Up Form
+    "I can build up to n by combining smaller values"	→ Use a dp[] array to store number of ways to build each sum
+    "To make j, I might have added i^x to j - i^x"	→ dp[j] += dp[j - val]
+    "Avoid using the same value twice"	→ Loop backwards from n to val using only once the current power
+    📌 Bottom Line
+
+    If your instinct said:
+
+    “Prefix sums seem useful”
+
+    That’s a very strong signal you're ready to start thinking in bottom-up tabulation.
+
+    Because you're:
+
+    Breaking the problem into additive parts
+
+    Thinking about how to reuse previous computations
+
+    Aware of ordering and how earlier decisions affect later outcomes
+
+    That’s literally the heart of DP.
+    🚀 TL;DR
+    Next time you feel that prefix-style structure:
+
+    Stop and ask: “Can I precompute smaller results in an array and build up?”
+
+    That’s often the path to tabulation.
+
+📅 2025-08-16
+    To track whether a number exists use a HashSet<Integer> instead of a HashMap<Integer, ?>.
+
+📅 2025-08-18
+    Solved the probability problem (reach a score with draws of maxPts) without recursion (small win)
+    just looking at the problem and identifying its underlying or hidden accumulative formula.
+
+📅 2025-08-20
+    Yesterday and today was trying to solve the 24 game, intuition guided to 90% of the actual solution
+    Stop taking too long on one approach, DO NOT get satisfied with one or two approaches.
+    Missed Thought: "What if I take two numbers, apply op, pass result to recursion?"
+    Prev Mistake: Took only one number per recursion step — TOO RESTRICTIVE
+    Core Idea: Combine pairs → reduce list → recurse on smaller set
+    Next time: Always ask: Am I limiting the recursion unnecessarily?
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    !!!!!! AM I LIMITING THE RECURSION IN ANY WAY? AND UNNECESSARILY? !!!!!
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    🧩 Ask this early. Ask this ^ always.
+
+📅 2025-08-25
+    Matrix traversal approach: enumeration - it's like a prefix sum of the matrices, each point is the lower right vertex of the square or rectangle the current point is part of
+    OOP: Interface - abstract types that define a contract (set of methods signatures), unless using default or static.
+📅 2025-08-26
+Matrices problems: monotonic stack approach:
+    Key Idea: Maintain a stack that is either increasing or decreasing to track candidate elements for comparisons.
+    Examples:
+        Largest Rectangle in Histogram (width = current_index - (stack.empty() ? 0 : stack.peek() - 1), then, area[current_index] = width * heights[stack.pop()])
+        Next Greater Element on array
+        Daily Temperatures
+        Maximal Rectangle in Binary Matrix
+
+📅 2025-08-28
+    Matrices:
+        int[width] heights; // in order to keep track of the heights of each column at each row, no need to have an additional matrix of the same size
+
+📅 2025-09-03
+    Arrays:
+        Operating between heights can be done with two pointers
+        Also two pointers can be a useful tool when trying to reach a target by doing arithmetic ops
