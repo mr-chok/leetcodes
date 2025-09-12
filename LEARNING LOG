@@ -1,6 +1,0 @@
-📅 2025-08-06
-  🧠 Today: practiced binary search, HashMaps, and memoization on the fruit allocation problem
-  ↪ solution handled up to 4k elements, failed at 5k+
-  ↪ next step: study square root decomposition, segmentation trees (as per LeetCode optimal)
-
-  💡 Still fresh: prefix sums, signatures (e.g. for palindromes)
