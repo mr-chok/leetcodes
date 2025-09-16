@@ -6,6 +6,7 @@ DS and algorithms applied so far:
 - prefix sum
 - Monotonic stacks
 - Linked Lists
+- Bit manipulation
 - Min heaps
 - Two pointers approaches
 - Awareness of branching instructions when traversing arrays
